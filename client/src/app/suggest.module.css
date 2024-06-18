@@ -1,0 +1,16 @@
+.stocks-container {
+  display: flex;
+  justify-content: center;
+  border: solid 1px black;
+  margin: 10px;
+}
+
+.stock {
+  border: solid 1px #cdcdcd;
+  flex-grow: 1;
+}
+
+.test {
+  display: flex;
+}
+

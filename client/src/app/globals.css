@@ -1,0 +1,65 @@
+.container {
+  border: solid 1px;
+  width: 20%;
+  margin: 10px;
+}
+
+.child-items {
+  flex-grow: 1;
+  border: solid 1px;
+}
+
+.stack-container{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.stocks-container {
+  border: solid 1px black;
+  margin: 10px;
+  width: 50%;
+}
+
+.stock {
+  border: solid 1px #cdcdcd;
+  flex-grow: 1;
+}
+
+.test {
+  display: flex;
+}
+
+.suggestContainer {
+  width: 20%;
+}
+.watch-stock {
+  border: solid 1px;
+  padding: 10px 20px;
+  display: flex;
+}
+
+.watchlist {
+  /* border: solid 1px black; */
+  margin: 10px;
+  width: 20%;
+}
+
+.input {
+  margin: 10px;
+}
+
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root{
+  width: 50%;
+}
+.table-div{
+  display: flex;
+  justify-content: center;
+}
+button {
+  background-color: transparent;
+  color: #000; /* Set the color of the text */
+  border: 1px solid #cdcdcd; /* Optional: Add border for better visibility */
+  padding: 10px 20px; /* Optional: Adjust padding as needed */
+  cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  border: solid 1px;
+  width: 20%;
+  margin: 10px;
+}
+
+.child-items {
+  flex-grow: 1;
+  border: solid 1px;
+}
+
+.stack-container{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
