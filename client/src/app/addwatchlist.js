@@ -11,7 +11,7 @@ export default function AddWatchList({
 }) {
   const [count, setCount] = useState(len);
   let init = [];
-  for (let i = 1; i <= len; i++) {
+  for (let i = 0; i <= len; i++) {
     init.push(
       <Button variant="outlined" onClick={() => handleButton(i)}>
         {i}

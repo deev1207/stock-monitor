@@ -1,4 +1,5 @@
 import './globals.css'
+import { useState, useRef } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,14 +15,16 @@ function createData(name, symbol, add) {
 }
 
 export default function Suggest({ stocks, handleStock, childRef }) {
+  const addedStocks = useRef([])
   const handleClick = (stock) => {
+    addedStocks.current.push(stock['symbol'])
     handleStock(stock);
   };
   const stocks_arr = [];
   for (const item of stocks) {
     stocks_arr.push(
       createData(item["name"], item["symbol"], <Stack direction="row" spacing={2}   justifyContent="center">
-        <Button style={{ margin: 10 }}  variant="outlined" color="error" onClick={() => handleClick(item)}>
+        <Button key={item["symbol"]} style={{ margin: 10 }}  variant="outlined" color={addedStocks.current.includes(item['symbol'])? 'success' : 'error'} onClick={() => handleClick(item)}>
           +
         </Button>
       </Stack>)

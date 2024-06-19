@@ -22,7 +22,7 @@ const Home = () => {
   const [display, setDisplay] = useState(false);
   const [focus, setFocus] = useState(true);
   const vis = useRef(true);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Home = () => {
     } else {
       axios
         .get(
-          `https://financialmodelingprep.com/api/v3/search?query=${text}&limit=5&apikey=OSCS5zDS3NdNdX0lQdkMgdDGYyy9Y3Xy `
+          `https://financialmodelingprep.com/api/v3/search?query=${text}&limit=5&apikey=oeZLpIgP4LF3FTjHiCD4or43Lz9EEpE5`
         )
         .then((response) => {
           setSuggest(response.data);
@@ -120,7 +120,7 @@ const Home = () => {
 
     axios
       .get(
-        `https://financialmodelingprep.com/api/v3/profile/${stock.symbol}?apikey=OSCS5zDS3NdNdX0lQdkMgdDGYyy9Y3Xy `
+        `https://financialmodelingprep.com/api/v3/profile/${stock.symbol}?apikey=oeZLpIgP4LF3FTjHiCD4or43Lz9EEpE5 `
       )
       .then((response) => {
         if (response.data.length > 0) {
@@ -151,7 +151,13 @@ const Home = () => {
     setData((prev) => {
       return prev.slice(0, -1);
     });
-    setCurrent(index - 1);
+    if(index-1<0){
+      setCurrent(0);
+    }
+    else{
+      setCurrent(index - 1);
+    }
+
   };
 
   const handleLogout = async () => {
@@ -193,9 +199,9 @@ const Home = () => {
           {suggest && <Suggest stocks={suggest} childRef={childRef} handleStock={handleStock} />}
         </div>
       ) : (
-        vis.current && data.length > 1 && <WatchList data={data[current]} index={current} />
+        vis.current && data.length > 0 && <WatchList data={data[current]} index={current} />
       )}
-      {data.length > 1 && (
+      {data.length > 0 && (
         <AddWatchList
           switchWatchList={switchWatchList}
           len={data.length - 1}
