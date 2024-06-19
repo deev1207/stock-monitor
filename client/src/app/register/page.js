@@ -23,7 +23,11 @@ export default function SignUp() {
   const handleSubmit = async function (event) {
     event.preventDefault();
     try {
-      const res = await axios.post(`https://stock-tool-server.onrender.com/login`, {
+      const url = window.location.href;
+      const parts = url.split("/");
+      const endpt = parts[parts.length - 1];
+      console.log(endpt);
+      const res = await axios.post(`https://stock-tool-server.onrender.com/register`, {
         username,
         password,
       });
@@ -69,17 +73,11 @@ export default function SignUp() {
 
         <Stack sx={{ m: 3}} direction="row" spacing={2}>
           <Button  variant="outlined" color="success" type="submit">
-            Submit
+            Register
           </Button>
         </Stack>
       </div>
-      <div className={styles.login}>
-      <Stack sx={{ m: 3}} direction="row" spacing={2}>
-          <Button  variant="outlined" onClick={handleSignUp}>
-            Sign Up
-          </Button>
-        </Stack>
-      </div>
+
 
 
 
