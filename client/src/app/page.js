@@ -26,10 +26,19 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
+    const hasVisited = localStorage.getItem('hasVisited');
+
+    if (!hasVisited) {
+      localStorage.setItem('hasVisited', 'true');
+      router.replace('/login');
+    }
+  }, [router]);
+  
+  useEffect(() => {
     const username = localStorage.getItem("username");
     if (username) {
       axios
-        .get(`http://localhost:8000/getWatchListByUsername?username=${username}`)
+        .get(`https://stock-tool-server.onrender.com/getWatchListByUsername?username=${username}`)
         .then((res) => {
           setData(res.data.watchList);
         })
@@ -37,7 +46,7 @@ const Home = () => {
           router.push("/login");
         });
     } else {
-      router.push("/login");
+      // router.push("/login");
     }
   }, []);
 
@@ -46,7 +55,7 @@ const Home = () => {
     console.log(data);
     if (data.length > 0) {
       axios
-        .post("http://localhost:8000/createList", {
+        .post("https://stock-tool-server.onrender.com/createList", {
           username,
           watchList: data,
         })
@@ -63,7 +72,7 @@ const Home = () => {
     } else {
       axios
         .get(
-          `https://financialmodelingprep.com/api/v3/search?query=${text}&limit=10&apikey=OSCS5zDS3NdNdX0lQdkMgdDGYyy9Y3Xy `
+          `https://financialmodelingprep.com/api/v3/search?query=${text}&limit=5&apikey=OSCS5zDS3NdNdX0lQdkMgdDGYyy9Y3Xy `
         )
         .then((response) => {
           setSuggest(response.data);
@@ -147,7 +156,7 @@ const Home = () => {
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
-    await axios.get("http://localhost:8000/logout");
+    await axios.get("https://stock-tool-server.onrender.com/logout");
     router.push("/login");
   };
 
@@ -180,8 +189,8 @@ const Home = () => {
       </div>
 
       {display ? (
-        <div className={styles.suggestContainer} ref={childRef}>
-          {suggest && <Suggest stocks={suggest} handleStock={handleStock} />}
+        <div >
+          {suggest && <Suggest stocks={suggest} childRef={childRef} handleStock={handleStock} />}
         </div>
       ) : (
         vis.current && data.length > 1 && <WatchList data={data[current]} index={current} />

@@ -24,7 +24,7 @@ export default function SignUp() {
       const parts = url.split("/");
       const endpt = parts[parts.length - 1];
       console.log(endpt);
-      const res = await axios.post(`http://localhost:8000/${endpt}`, {
+      const res = await axios.post(`https://stock-tool-server.onrender.com/${endpt}`, {
         username,
         password,
       });
