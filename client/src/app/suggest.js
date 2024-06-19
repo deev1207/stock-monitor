@@ -15,16 +15,18 @@ function createData(name, symbol, add) {
 }
 
 export default function Suggest({ stocks, handleStock, childRef }) {
-  const addedStocks = useRef([])
+  const [addedStocks,setAddedStocks] = useState([])
   const handleClick = (stock) => {
-    addedStocks.current.push(stock['symbol'])
+    const updated_stocks = [...addedStocks]
+    updated_stocks.push(stock['symbol'])
+    setAddedStocks(updated_stocks)
     handleStock(stock);
   };
   const stocks_arr = [];
   for (const item of stocks) {
     stocks_arr.push(
       createData(item["name"], item["symbol"], <Stack direction="row" spacing={2}   justifyContent="center">
-        <Button key={item["symbol"]} style={{ margin: 10 }}  variant="outlined" color={addedStocks.current.includes(item['symbol'])? 'success' : 'error'} onClick={() => handleClick(item)}>
+        <Button key={item["symbol"]} style={{ margin: 10 }}  variant="outlined" color={addedStocks.includes(item['symbol'])? 'success' : 'error'} onClick={() => handleClick(item)}>
           +
         </Button>
       </Stack>)
